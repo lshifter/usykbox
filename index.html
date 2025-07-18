@@ -3,132 +3,232 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Пряма трансляція Усик–ДЮБУА 2</title>
+  <title>Усик – Дюбуа 2 | Пряма трансляція</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
-    /* Reset & Base */
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     html, body { height:100%; font-family:'Roboto',sans-serif; }
     body {
-      background: url('https://javarush.ru/images/article/175c307b-2250-45db-9d7f-4f6ea1400c7c/original.png') center/cover fixed;
+      background: url('https://javarush.ru/images/article/175c307b-2250-45db-9d7f-4f6ea1400c7c/original.png') center/cover no-repeat fixed;
       color:#fff; overflow-x:hidden; position: relative;
+      min-height: 100vh;
     }
-    body::after { content:''; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:0; }
-    .wrapper { position:relative; z-index:1; max-width:1000px; margin:0 auto; padding:40px 20px; text-align:center; }
+    body::after { content:''; position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:0; pointer-events:none; }
+    .wrapper { position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:40px 10px 28px; text-align:center; }
 
-    /* Logos */
-    .logo-container { display:flex; justify-content:center; align-items:center; gap:20px; margin-bottom:20px; }
-    .logo-container img { width:80px; height:auto; }
+    .logo-container { display:flex; justify-content:center; align-items:center; gap:18px; margin-bottom:20px; }
+    .logo-container img { width:64px; height:auto; filter:drop-shadow(0 2px 8px #000a);}
+    .headline { font-size:2.2rem; color:#FFD700; font-weight:700; margin-bottom:10px; letter-spacing:1px; text-shadow:0 2px 8px #0008; }
+    #countdown { font-size:1.1rem; color:#FFD700; margin-bottom:24px; letter-spacing:1px; }
 
-    /* Headline & CTA */
-    .headline { font-size:2.8rem; color:#FFD700; text-shadow:0 2px 8px rgba(0,0,0,0.8); margin:20px 0; }
-    .subtext { font-size:1.2rem; margin-bottom:10px; }
-    .free-note { font-size:1rem; color:#0ff; margin-bottom:20px; }
-    .cta-btn { display:inline-block; padding:16px 36px; background:linear-gradient(45deg,#FF8C00,#FF4500); color:#fff;
-      border-radius:50px; font-size:1.1rem; font-weight:700; text-decoration:none; box-shadow:0 6px 12px rgba(0,0,0,0.6);
-      transition:transform .3s; margin-bottom:10px;
+    .fight-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      margin: 0 auto 18px;
+      width: 100%;
+      max-width: 900px;
+      position: relative;
     }
-    .cta-btn:hover { transform:scale(1.05); }
-    .small-note { font-size:0.9rem; color:rgba(255,255,255,0.6); margin-top:5px; }
-
-    /* Decorative Elements */
-    .decor { position:absolute; top:10%; left:5%; font-size:4rem; opacity:0.2; transform:rotate(-15deg); color:#FFD700; }
-    .decor2 { position:absolute; bottom:10%; right:5%; font-size:4rem; opacity:0.2; transform:rotate(20deg); color:#FF4500; }
-
-    /* Countdown */
-    #countdown { font-size:1.2rem; color:#FFD700; margin:20px 0; }
-
-    /* Video Window */
-    .video-window { position:relative; width:90%; max-width:900px; margin:30px auto;
-      background: linear-gradient(135deg,#1e3c72,#2a5298); border:2px solid rgba(255,215,0,0.8);
-      border-radius:12px; overflow:hidden; box-shadow:0 8px 16px rgba(0,0,0,0.7);
+    .fighter-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 130px;
+      max-width: 170px;
+      width: 18vw;
+      position: relative;
+      z-index: 2;
     }
-    .video-window video { width:100%; display:block; }
-    .video-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.75);
+    .fighter-pic img {
+      width: 100%;
+      max-width: 160px;
+      height: 210px;
+      border-radius: 18px;
+      box-shadow: 0 0 22px #000c, 0 1px 24px #ffd70042;
+      object-fit: cover;
+      background: #101820;
+      border:3px solid #ffd700b7;
+    }
+    .fighter-name {
+      margin-top: 12px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #FFD700;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 10px #0009;
+    }
+    .koef-block {
+      margin-top: 10px;
+      margin-bottom: 4px;
+      width: 98px;
+      text-align: center;
+    }
+    .koef-link {
+      display:inline-block;
+      width:100%;
+      padding:9px 0;
+      font-size:1.1rem;
+      font-weight:700;
+      border-radius: 11px;
+      background:linear-gradient(90deg,#FFD700 80%,#E4C200 100%);
+      color:#141414;
+      box-shadow:0 2px 10px #ffd70055;
+      text-decoration:none;
+      border:2px solid #141414;
+      letter-spacing:1px;
+      transition:.18s;
+      position: relative;
+      z-index: 3;
+      outline: none;
+    }
+    .koef-link:hover, .koef-link:focus {
+      background:linear-gradient(90deg,#fff700,#FFD700 60%);
+      color:#000;
+      border-color:#FFD700;
+      transform: scale(1.07);
+      box-shadow:0 2px 18px #ffd700bb, 0 0 8px #fff50099;
+    }
+
+    .video-window {
+      flex: 1 1 480px;
+      background:linear-gradient(135deg,#1e3c72,#2a5298);
+      border:2px solid #ffd900e8;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 8px 22px #000c;
+      min-width: 0;
+      min-height:320px;
+      position: relative;
+      aspect-ratio: 16 / 9;
+      max-width: 620px;
+      margin: 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-window video {
+      width:100%; height:100%; display:block; object-fit:cover; filter: blur(10px) brightness(0.43);
+    }
+    .video-overlay {
+      position:absolute; inset:0; background:rgba(0,0,0,0.77);
       display:flex; justify-content:center; align-items:center;
     }
-    .play-icon { font-size:5rem; color:#FFD700; cursor:pointer; animation:pulse 2s infinite; }
+    .play-icon {
+      font-size:6rem; color:#FFD700; cursor:pointer; animation:pulse 2s infinite; filter:drop-shadow(0 0 16px #ffd700a2);
+      transition:transform .18s;
+    }
+    .play-icon:active { transform: scale(1.13);}
+    .small-note { font-size:0.97rem; color:rgba(255,255,255,0.56); margin-bottom:2px; }
+    .footer { margin-top:34px; font-size:0.99rem; opacity:0.81; }
+    .decor, .decor2 { display:none;}
 
     /* Modal */
-    .modal-bg { position:fixed; inset:0; background:rgba(0,0,0,0.85);
-      display:flex; align-items:center; justify-content:center;
-      opacity:0; visibility:hidden; transition:opacity .3s; z-index:3;
-    }
+    .modal-bg { position:fixed; inset:0; background:rgba(0,0,0,0.96); display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden; transition:opacity .28s; z-index:5; }
     .modal-bg.show { opacity:1; visibility:visible; }
-    .modal { position:relative; background:#222; padding:30px; border-radius:8px;
-      width:90%; max-width:400px; text-align:center; box-shadow:0 8px 16px rgba(0,0,0,0.7);
+    .modal {
+      position:relative; background:#181818; padding:22px 9px 20px;
+      border-radius:12px; width:98%; max-width:470px; text-align:center; box-shadow:0 8px 26px #000d;
     }
-    .modal h2 { font-size:1.5rem; color:#FFD700; margin-bottom:20px; }
-    .modal-btn { display:block; margin:10px 0; padding:12px; background:#FF4500;
-      color:#fff; border-radius:6px; text-decoration:none; font-weight:700;
-      transition:background .3s;
-    }
+    .modal h2 { font-size:1.23rem; color:#FFD700; margin:0 0 12px; }
+    .modal-btn { display:block; margin:13px auto 0; padding:15px 0; width:100%; background:#FF4500; color:#fff; border-radius:8px; font-weight:700; font-size:1.12rem; text-decoration:none; box-shadow:0 4px 14px #0008; letter-spacing:.6px; transition:background .23s;}
     .modal-btn:hover { background:#FF8C00; }
-    .close-btn { position:absolute; top:10px; right:10px; font-size:1.2rem; color:#fff; cursor:pointer; }
+    .close-btn { position:absolute; top:10px; right:17px; font-size:1.19rem; color:#fff; cursor:pointer; }
+    .modal-trust { margin-top:16px; font-size:1.03rem; color:#0ff; }
+    @keyframes pulse { 0%,100%{transform:scale(1);}50%{transform:scale(1.09);} }
 
-    /* Trust signals in modal */
-    .modal-trust { margin-top:20px; font-size:0.9rem; color:#0ff; }
-
-    /* Footer */
-    .footer { margin-top:40px; font-size:0.9rem; opacity:0.8; }
-
-    /* Animations */
-    @keyframes pulse { 0%,100%{transform:scale(1);}50%{transform:scale(1.1);} }
-
-    /* Responsive */
-    @media(max-width:768px) { .headline{font-size:2.2rem;} .subtext,.free-note{font-size:1rem;} .play-icon{font-size:4rem;} }
-    @media(max-width:480px) { .cta-btn{padding:12px 24px;font-size:1rem;} #countdown{font-size:1rem;} }
+    /* Responsive styles */
+    @media(max-width:900px){
+      .wrapper { padding-top:22px;}
+      .fight-row { gap:10px;}
+      .fighter-col { max-width:98px; min-width:76px;}
+      .fighter-pic img { max-width:90px; height:120px; }
+      .video-window { max-width: 95vw; min-height:160px;}
+      .koef-block { width:80px; }
+      .koef-link { font-size:1rem; }
+    }
+    @media(max-width:650px){
+      .fight-row { flex-direction:column; gap:0; align-items:stretch;}
+      .fighter-col {
+        order:1;
+        margin:0 auto 9px;
+        width:90px; max-width:90px; min-width:70px;
+      }
+      .fighter-col.right { order:3; margin-top:9px;}
+      .video-window { order:2; min-height:150px; border-radius:10px;}
+      .fighter-name { font-size:0.95rem; }
+      .koef-block { margin-top:8px; }
+    }
+    @media(max-width:440px){
+      .headline { font-size:1.07rem;}
+      .logo-container img {width:34px;}
+      .modal {padding:10px 2px;}
+      .modal-btn {font-size:0.99rem;}
+      .modal-trust{font-size:0.97rem;}
+      .footer{font-size:0.88rem;}
+    }
   </style>
 </head>
 <body>
-  <div class="decor">🏆</div>
-  <div class="decor2">🔥</div>
   <div class="wrapper">
     <div class="logo-container">
-      <img src="https://igrovi-avtomati.com.ua/media/parik24.png" alt="PARIK24 Logo">
-      <img src="https://www.instalki.pl/wp-content/uploads/program/icons/M/1d2786039dcc545cccf678a1f4fe95c4unnamed.png" alt="Megogo Logo">
+      <img src="https://igrovi-avtomati.com.ua/media/parik24.png" alt="PARIK24">
+      <img src="https://www.instalki.pl/wp-content/uploads/program/icons/M/1d2786039dcc545cccf678a1f4fe95c4unnamed.png" alt="Megogo">
     </div>
-    <h1 class="headline">Пряма трансляція Усик–ДЮБУА 2</h1>
-    <p class="subtext">Зробіть ставку на сайті офіційного партнера для доступу до трансляції</p>
-    <p class="free-note">Трансляція безкоштовна для всіх українців!</p>
-    <p class="free-note">Це офіційна акція: PARIK 24 викупив права та дає доступ за будь-яку ставку на бій</p>
-    <a href="https://gamehub.g2afse.com/click?pid=3751&offer_id=595" class="cta-btn">💰 Зробити ставку</a>
-    <p class="small-note">став та перемагай</p>
-    <div id="countdown">Пропозиція діє: <span id="timer"></span></div>
-    <div class="video-window">
-      <video id="videoElm" controls muted>
-        <source src="" type="video/mp4">
-        Ваш браузер не підтримує відео.
-      </video>
-      <div class="video-overlay">
-        <div class="play-icon" id="playBtn">▶️</div>
+    <h1 class="headline">Усик — Дюбуа 2 <span style="font-size:1.1rem; color:#fff; font-weight:400; letter-spacing:0;">| Пряма трансляція</span></h1>
+    <div id="countdown">Трансляція доступна: <span id="timer"></span></div>
+    
+    <div class="fight-row">
+      <!-- Усик слева -->
+      <div class="fighter-col left">
+        <div class="fighter-pic">
+          <img src="https://dynamo.kiev.ua/media/posts/2023/12/18/7.jpg" alt="Олександр Усик" loading="lazy">
+        </div>
+        <div class="fighter-name">Усик</div>
+        <div class="koef-block">
+          <a href="https://track.smartlink-gh.site/sl?id=687a0b103913fc6f4740965e&pid=3751&sub1=link1" class="koef-link" target="_blank">Коеф: х1.36</a>
+        </div>
+      </div>
+      <div class="video-window">
+        <video id="videoElm" style="width:100%;height:100%;" poster="https://i.imgur.com/w3F4F7G.jpeg" muted></video>
+        <div class="video-overlay">
+          <div class="play-icon" id="playBtn">▶️</div>
+        </div>
+      </div>
+      <!-- Дюбуа справа -->
+      <div class="fighter-col right">
+        <div class="fighter-pic">
+          <img src="https://i.dailymail.co.uk/1s/2024/09/20/18/89921213-13874489-image-a-36_1726855165836.jpg" alt="Дюбуа" loading="lazy">
+        </div>
+        <div class="fighter-name">Дюбуа</div>
+        <div class="koef-block">
+          <a href="https://track.smartlink-gh.site/sl?id=687a0b103913fc6f4740965e&pid=3751&sub1=link1" class="koef-link" target="_blank">Коеф: х3.94</a>
+        </div>
       </div>
     </div>
-    <p class="small-note">для отримання доступу натисніть «▶️»</p>
-    <div class="footer">PARIK 24 — офіційний партнер трансляції. Всі права захищені.</div>
+
+    <p class="small-note">Дивись безкоштовно — натисни ▶️</p>
+    <div class="footer">PARIK 24 — офіційний партнер. Всі права захищено.</div>
   </div>
 
   <div class="modal-bg" id="modal">
     <div class="modal">
       <span class="close-btn" id="closeModal">✖</span>
-      <!-- Embedded YouTube video -->
-      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:15px;">
-        <iframe src="https://www.youtube.com/embed/9e1jO69dtic?si=RzVa0B9StyNCnZ0q" 
-                style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" 
-                allow="autoplay; encrypted-media; fullscreen" allowfullscreen>
+      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;margin-bottom:13px;">
+        <iframe src="https://www.youtube.com/embed/9e1jO69dtic?si=RzVa0B9StyNCnZ0q"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" 
+          allow="autoplay; encrypted-media; fullscreen" allowfullscreen>
         </iframe>
       </div>
-      <h2>Для доступу зробіть ставку</h2>
-      <a href="https://gamehub.g2afse.com/click?pid=3751&offer_id=595" class="modal-btn" target="_blank">
-        💰 Зробити ставку
-      </a>
+      <h2>Щоб отримати доступ, зробіть ставку</h2>
+      <a href="https://track.smartlink-gh.site/sl?id=687a0b103913fc6f4740965e&pid=3751&sub1=link1" class="modal-btn" target="_blank">💰 Зробити ставку</a>
       <div class="modal-trust">🔒 Безпечні платежі · 💯 Гарантія виплат · ⭐ Рейтинг 4.8/5</div>
     </div>
-  </div>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Таймер (киевское время)
       const timerEl = document.getElementById('timer');
       function updateTimer() {
         const now = new Date();
@@ -145,6 +245,8 @@
       }
       updateTimer();
       setInterval(updateTimer, 1000);
+
+      // Modal
       const playBtn = document.getElementById('playBtn');
       const modal = document.getElementById('modal');
       const closeBtn = document.getElementById('closeModal');
